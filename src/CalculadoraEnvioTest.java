@@ -38,4 +38,16 @@ class CalculadoraEnvioTest {
     void frontera_1000_tieneEnvioGratis() {
         assertEquals(0.0, CalculadoraEnvio.calcular(1000.00), 0.001);
     }
+
+    @Test
+    void clientePremiumTieneEnvioGratisEnPedidoPequeno() {
+        assertEquals(0.0, CalculadoraEnvio.calcular(100.0, true), 0.001);
+    }
+
+    @Test
+    void clienteNormalConservaSuTarifa() {
+        assertEquals(100.0, CalculadoraEnvio.calcular(100.0, false), 0.001);
+    }
+
+
 }

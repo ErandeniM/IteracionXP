@@ -12,9 +12,7 @@ public class CalculadoraEnvio {
     }
 
     public static double calcular(double importePedido, boolean esPremium) {
-        if (esPremium) {
-            return ENVIO_GRATIS;
-        }
+      // PENDIENTE  if (esPremium) {return ENVIO_GRATIS;}
         if (importePedido < MINIMO_TARIFA_REDUCIDA) {
             return TARIFA_COMPLETA;
         }
