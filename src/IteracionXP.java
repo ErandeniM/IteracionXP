@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Problema: Se requiere implementar una función que calcule el costo de envío de una tienda en línea.
@@ -11,16 +11,19 @@ import java.util.Random;
  * Crear un repositorio y subir el URL al repositorio
  */
 
-public class Main {
+public class IteracionXP {
     public static void main(String[] args) {
         System.out.print("*****Bienvenido a la tienda en línea UNISON*****\n"+
                 "Costo de envío: $100\n"+
                 "Costo de envío en compras mayores a $999: Gratis!!!\n");
         System.out.println();
-        double costoEnvio = 100.0;
-        Random random = new Random();
-        double total = random.nextDouble(5000);
+        Scanner input = new Scanner(System.in);
+        System.out.print("Ingrese el total de su pedido: \n" + "$");
+        double total = input.nextDouble();
+        input.nextLine();
 
+        CalculadoraEnvio costoEnvio = new CalculadoraEnvio();
+        CalculadoraEnvio.calcular(total);
         System.out.printf("El total de su pedido es: $%.2f",total);
         System.out.println();
         if (total > 999) {
@@ -30,6 +33,12 @@ public class Main {
             System.out.println("Costo de envío:"+costoEnvio );
         }
 
+    }
+
+    public static class CalculadoraEnvio {
+        public static double calcular(double subtotal) {
+            return 100.0;
+        }
     }
 
 }
