@@ -1,26 +1,41 @@
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CalculadoraEnvioTest {
 
     @Test
-    void cobraTarifaBaseEnPedidoNormal() {
-        assertEquals(100.0, CalculadoraEnvio.calcular(500.0));
+    void pedidoMenorA500CobraTarifaCompleta() {
+        assertEquals(100.0, CalculadoraEnvio.calcular(400.0), 0.001);
     }
 
     @Test
-    void envioGratisEnPedidoMayorA999() {
-        assertEquals(0.0, CalculadoraEnvio.calcular(1500.0));
+    void pedidoIntermedioCobraTarifaReducida() {
+        assertEquals(50.0, CalculadoraEnvio.calcular(700.0), 0.001);
     }
 
     @Test
-    void envioGratisEnElLimiteDe1000() {
-        assertEquals(0.0, CalculadoraEnvio.calcular(1000.0));
+    void pedidoDe1000OMasTieneEnvioGratis() {
+        assertEquals(0.0, CalculadoraEnvio.calcular(1200.0), 0.001);
+    }
+
+    // Fronteras
+    @Test
+    void frontera_499_99_cobraTarifaCompleta() {
+        assertEquals(100.0, CalculadoraEnvio.calcular(499.99), 0.001);
     }
 
     @Test
-    void tarifaBaseJustoEn999() {
-        assertEquals(100.0, CalculadoraEnvio.calcular(999.0));
+    void frontera_500_cobraTarifaReducida() {
+        assertEquals(50.0, CalculadoraEnvio.calcular(500.00), 0.001);
+    }
+
+    @Test
+    void frontera_999_99_cobraTarifaReducida() {
+        assertEquals(50.0, CalculadoraEnvio.calcular(999.99), 0.001);
+    }
+
+    @Test
+    void frontera_1000_tieneEnvioGratis() {
+        assertEquals(0.0, CalculadoraEnvio.calcular(1000.00), 0.001);
     }
 }
